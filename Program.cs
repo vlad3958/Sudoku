@@ -5,7 +5,7 @@ namespace Sudoku
     class MainGame
     {
         static Random rnd = new Random();
-         public static int[,] map = new int[9, 9];
+        public static int[,] map = new int[9, 9];
 
         enum eDir
         {
@@ -20,8 +20,9 @@ namespace Sudoku
 
         static string[,] mapNew = new string[9, 9];
         private static string f;
-       public Constructor constructor;
-       public static string Start()
+        public Constructor constructor;
+
+        public static string Start()
         {
             Console.SetWindowSize(200, 50);
 
@@ -41,13 +42,14 @@ namespace Sudoku
                 "\t\t █████████████████████████████████████████████████████████████████████████████████████████████\n";
             Console.Write(s);
 
-            Console.WriteLine("\t\t    "+"Do you want to play the game or make yours Sudoku? ( 0 - make game, any other key - play)");
-             f = Console.ReadLine();
-           
+            Console.WriteLine("\t\t    " +
+                              "Do you want to play the game or make yours Sudoku? ( 0 - make game, any other key - play)");
+            f = Console.ReadLine();
+
             return f;
         }
 
-     
+
         public static void Generate()
         {
             Console.WriteLine("\t\t\t\t\tChoose the level of difficulty (from 1 to 3)");
@@ -261,7 +263,8 @@ namespace Sudoku
             }
         }
 
-         static int count = 0;
+        static int count = 0;
+
         public static void DrawLevel()
         {
             Console.Clear();
@@ -287,7 +290,7 @@ namespace Sudoku
 
                         if (i == 2 && j == 8 || i == 5 && j == 8)
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine();
                         }
 
                         Console.BackgroundColor = ConsoleColor.White;
@@ -303,36 +306,23 @@ namespace Sudoku
 
                         if (i == 2 && j == 8 || i == 5 && j == 8)
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine();
                         }
 
                         Console.BackgroundColor = ConsoleColor.White;
                     }
 
-                   
+
                 }
+
                 Console.WriteLine();
             }
-            /*for (int k = 0; k < 9; k++)
-            {
-                for (int l = 0; l < 9; l++)
-                {
-                    if (mapNew[k, l].Replace(" ",null).Replace("  |",null).Replace("|",null).Replace(" "+"|",null) == map[k, l].ToString())
-                    {
-                        count++;
-                        Console.Write("+");
-                    }
 
-                    if (count == 81)
-                    {
-                        Console.WriteLine("\t\t\t\t"+"You win!");
-                    }
-                }
-            }*/
         }
 
         public static void Input()
         {
+            count = 0;
             var button = Console.ReadKey(true);
             if (!int.TryParse(button.KeyChar.ToString(), out var k))
             {
@@ -383,7 +373,7 @@ namespace Sudoku
                                 if (i == 2 && j == 8 || i == 5 && j == 8)
                                 {
                                     Console.BackgroundColor = ConsoleColor.White;
-                                    Console.WriteLine(" ");
+                                    Console.WriteLine();
                                 }
                             }
                             else if (mapNew[i, j] != map[i, j].ToString() + "|")
@@ -400,7 +390,7 @@ namespace Sudoku
                                 if (i == 2 && j == 8 || i == 5 && j == 8)
                                 {
                                     Console.BackgroundColor = ConsoleColor.White;
-                                    Console.WriteLine(" ");
+                                    Console.WriteLine();
                                 }
                             }
 
@@ -416,17 +406,31 @@ namespace Sudoku
 
                             if (i == 2 && j == 8 || i == 5 && j == 8)
                             {
-                                Console.WriteLine(" ");
+                                Console.WriteLine();
                             }
 
                             Console.BackgroundColor = ConsoleColor.White;
                         }
                     }
-
                     Console.WriteLine();
                 }
-
+                Win();
+                if(count!=81)
                 Input();
+            }
+        }
+        public static void Win()
+        {
+            for (int p = 0; p < 9; p++)
+            {
+                for (int l = 0; l < 9; l++)
+                {
+                    if (mapNew[p, l].Replace(" ", null).Replace("  |", null).Replace("|", null)
+                            .Replace(" " + "|", null) == map[p, l].ToString())
+                    {
+                        count++;
+                    }
+                }
             }
         }
 
@@ -449,17 +453,6 @@ namespace Sudoku
             }
         }
 
-        // public static void Win()
-        // {
-        //     int count = 0;
-        //     for (int i = 0; i < map.GetLength(0); i++)
-        //     {
-        //         for (int j = 0; j < map.GetLength(1); j++)
-        //         {
-        //           
-        //         }
-        //     }
-        // }
         static void Main()
         {
             Start();
@@ -467,14 +460,25 @@ namespace Sudoku
             {
                 Constructor.Run();
             }
+
             Generate();
-                while (true)
+            while (true)
+            {
+                DrawLevel();
+                Input();
+               
+                if (count == 81)
                 {
-                    DrawLevel();
-                    Input(); 
-                   // Win();
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\n"+"\t\t\t\t\t\t\t\t"+"You won!");
+                    Console.BackgroundColor = ConsoleColor.White;
+                   
+                    break;
                 }
-            
+            }
+
         }
     }
 }
+

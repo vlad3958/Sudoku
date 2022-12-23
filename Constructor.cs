@@ -84,45 +84,140 @@ public class Constructor
 
 
     public static ConsoleKeyInfo a;
-
-    public static ConsoleKeyInfo Check()
+   static string[] arrI = new string[9];
+   static string[] arrJ = new string[9];
+   static string[] block = new string[9];
+    public static void Check()
     {
-
         for (int i = 0; i < mapCon.GetLength(0); i++)
         {
-            string[] arrI = new string[9];
-            string[] arrJ = new string[9];
             for (int j = 0; j < mapCon.GetLength(1); j++)
             {
                 arrI[j] = mapCon[i, j].Replace("0", null).Replace("|", null).Replace("  |", null).Replace(" ", null);
                 arrJ[j] = mapCon[j, i].Replace("0", null).Replace("|", null).Replace("  |", null).Replace(" ", null);
             }
-
-            var newarr = string.Concat(arrI);
-            var newarrJ = string.Concat(arrJ);
-
-            if (newarr.Length != newarr.Distinct().Count())
-            {
-                Console.WriteLine("Sudoku contains duplicates");
-
-                Console.WriteLine("Do you want to remake Sudoku?(y/n)");
-                a = Console.ReadKey(true);
-                break;
-            }
-
-            if (newarrJ.Length != newarrJ.Distinct().Count())
-            {
-                Console.WriteLine("Sudoku contains duplicates");
-
-                Console.WriteLine("Do you want to remake Sudoku?(y/n)");
-                a = Console.ReadKey(true);
-                break;
-            }
+                int r = 0;
+                for (int u = 0; u <= 2; u++)
+                {
+                    for (int t = 0; t <= 2; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                        .Replace("  |", null).Replace(" ", null);
+                    r++;
+                    }
+                }
+                Check2();  if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+               
+                for (int u = 0; u <= 2; u++)
+                {
+                    for (int t = 3; t <= 5; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                
+                for (int u = 0; u <= 2; u++)
+                {
+                    for (int t = 6; t <= 8; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                for (int u = 3; u <= 5; u++)
+                {
+                    for (int t = 0; t <= 2; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                for (int u = 3; u <= 5; u++)
+                {
+                    for (int t = 3; t <= 5; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                }Check2();  if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                for (int u = 3; u <= 5; u++)
+                {
+                    for (int t = 6; t <= 8; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                for (int u = 6; u <= 8; u++)
+                {
+                    for (int t = 0; t <= 2; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+                r = 0;
+                for (int u = 6; u <= 8; u++)
+                {
+                    for (int t = 3; t <= 5; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                } Check2();if(a.KeyChar.ToString()=="y")
+                    break; 
+                r = 0;
+                for (int u = 6; u <= 8; u++)
+                {
+                    for (int t = 6; t <= 8; t++)
+                    {
+                        block[r] = mapCon[u, t].Replace("0", null).Replace("|", null)
+                            .Replace("  |", null).Replace(" ", null);
+                        r++;
+                    }
+                }   Check2(); if(a.KeyChar.ToString()=="y")
+                    break;
+              
         }
-
-        return a;
     }
 
+    public static ConsoleKeyInfo Check2()
+    {
+        var newblock = string.Concat(block);
+        var newarr = string.Concat(arrI);
+        var newarrJ = string.Concat(arrJ);
+
+        if (newarr.Length != newarr.Distinct().Count()|| newblock.Length != newblock.Distinct().Count()||newarrJ.Length != newarrJ.Distinct().Count())
+        {
+            Console.WriteLine("Sudoku contains duplicates");
+
+            Console.WriteLine("Do you want to remake Sudoku?(y/n)");
+            a = Console.ReadKey(true);
+           
+        }
+        return a;
+    }
     public static void DrawLevel()
     {
         Console.Clear();
