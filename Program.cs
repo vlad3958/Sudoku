@@ -308,16 +308,13 @@ namespace Sudoku
                         {
                             Console.WriteLine();
                         }
-
                         Console.BackgroundColor = ConsoleColor.White;
                     }
-
-
                 }
-
                 Console.WriteLine();
             }
-
+Console.ResetColor();
+            Console.WriteLine("\n\t\t\t\t\t\t\tpress WASD keys to move");
         }
 
         public static void Input()
@@ -414,6 +411,8 @@ namespace Sudoku
                     }
                     Console.WriteLine();
                 }
+                Console.ResetColor();
+                Console.WriteLine("\n\t\t\t\t\t\t\tpress WASD keys to move");
                 Win();
                 if(count!=81)
                 Input();

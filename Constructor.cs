@@ -22,6 +22,8 @@ public class Constructor
         public static void Construct()
         {
             Console.Clear();
+            Console.ResetColor();
+            Console.WriteLine("\n\t\t\t\t\tpress numbers to make Sudoku and '0' for empty element\n");
             for (int i = 0; i < mapCon.GetLength(0); i++)
             {
                 Console.BackgroundColor = ConsoleColor.Black;
@@ -47,7 +49,6 @@ public class Constructor
                         {
                             Console.WriteLine();
                         }
-
                         continue;
                     }
 
@@ -65,17 +66,6 @@ public class Constructor
                     }
 
                     Console.BackgroundColor = ConsoleColor.White;
-                }
-
-                Console.WriteLine();
-            }
-
-            Console.Clear();
-            for (int i = 0; i < mapCon.GetLength(0); i++)
-            {
-                for (int j = 0; j < mapCon.GetLength(1); j++)
-                {
-                    Console.Write(mapCon[i, j]);
                 }
 
                 Console.WriteLine();
@@ -204,15 +194,16 @@ public class Constructor
 
     public static ConsoleKeyInfo Check2()
     {
+        Console.BackgroundColor = ConsoleColor.Black;
         var newblock = string.Concat(block);
         var newarr = string.Concat(arrI);
         var newarrJ = string.Concat(arrJ);
-
+      
         if (newarr.Length != newarr.Distinct().Count()|| newblock.Length != newblock.Distinct().Count()||newarrJ.Length != newarrJ.Distinct().Count())
         {
-            Console.WriteLine("Sudoku contains duplicates");
+            Console.WriteLine("\t\t\t\t\t\t\tSudoku contains duplicates");
 
-            Console.WriteLine("Do you want to remake Sudoku?(y/n)");
+            Console.WriteLine("\t\t\t\t\t\t\tTo redo Sudoku press 'y' ");
             a = Console.ReadKey(true);
            
         }
@@ -262,9 +253,9 @@ public class Constructor
 
                 Console.BackgroundColor = ConsoleColor.White;
             }
-
             Console.WriteLine();
         }
+        
     }
 
     public static void Input()
